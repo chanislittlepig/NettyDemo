@@ -1,0 +1,36 @@
+option java_package="com.jianhua.netty.serialize.message";
+option java_outer_classname="UserInfo";
+
+message User{
+
+    required string name = 1;
+
+    required string password = 2;
+
+    optional int64 phoneno = 3;
+
+    repeated string hobby = 4;
+
+    optional string sex = 5;
+
+    optional UserStatus status = 6[default = OFF_LINE];
+
+    optional Address address = 7;
+
+    enum UserStatus{
+
+        ON_LINE = 0;
+        OFF_LINE = 1;
+
+    }
+
+    message Address{
+
+        required string addr = 1;
+
+        optional string postcode = 2;
+
+    }
+
+
+}
