@@ -1,4 +1,4 @@
-package com.jianhua.netty.http.file;
+package com.jianhua.netty.http.web;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
@@ -14,11 +14,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author lijianhua
  */
-public class HttpFileServerInitializeHandler extends ChannelInitializer<SocketChannel> {
+public class HttpWebServerInitializeHandler extends ChannelInitializer<SocketChannel> {
 
     private SslContext sslCtx = null;
 
-    public HttpFileServerInitializeHandler(SslContext sslContext) {
+    public HttpWebServerInitializeHandler(SslContext sslContext) {
         this.sslCtx = sslContext;
     }
 
@@ -32,6 +32,6 @@ public class HttpFileServerInitializeHandler extends ChannelInitializer<SocketCh
         ch.pipeline().addLast(new HttpObjectAggregator(60 * 65536));
       //  ch.pipeline().addLast(new HttpContentCompressor());
         ch.pipeline().addLast(new ChunkedWriteHandler());
-        ch.pipeline().addLast(new HttpFileServerHandler());
+        ch.pipeline().addLast(new HttpWebServerHandler());
     }
 }

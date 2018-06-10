@@ -1,4 +1,4 @@
-package com.jianhua.netty.http.file;
+package com.jianhua.netty.http.web;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 /**
  * @author lijianhua
  */
-public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
+public class HttpWebServerHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
     private String resourceRoot = null;
 
@@ -217,7 +217,7 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
                 resourceRoot = Thread.currentThread()
                         .getContextClassLoader().getResource(".").toURI().getPath();
                 if (resourceRoot == null) {
-                    resourceRoot = HttpFileServerHandler.class.getResource("/").toURI().getPath();
+                    resourceRoot = HttpWebServerHandler.class.getResource("/").toURI().getPath();
                 }
 
                 if (resourceRoot == null) {

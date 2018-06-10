@@ -1,4 +1,4 @@
-package com.jianhua.netty.http.file;
+package com.jianhua.netty.http.web;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
@@ -13,7 +13,7 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
 /**
  * @author lijianhua
  */
-public class HttpFileServer {
+public class HttpWebServer {
 
     public void startAt(int port, boolean ssl){
         NioEventLoopGroup boss = new NioEventLoopGroup(1);
@@ -32,7 +32,7 @@ public class HttpFileServer {
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG, 100)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new HttpFileServerInitializeHandler(sslContext));
+                    .childHandler(new HttpWebServerInitializeHandler(sslContext));
 
             bootstrap.bind(port).sync()
                     .channel().closeFuture().sync();
@@ -48,7 +48,7 @@ public class HttpFileServer {
     }
 
     public static void main(String[] args) {
-        new HttpFileServer().startAt(80, false);
+        new HttpWebServer().startAt(80, false);
     }
 
 }
