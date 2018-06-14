@@ -20,10 +20,11 @@ public class ChatMessageHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         group.add(ctx.channel());
+        final Channel currentChannel = ctx.channel();
         group.writeAndFlush("用户：["+ ctx.channel().remoteAddress() +"]加入, 当前在线人数:" + group.size() +"\n", new ChannelMatcher() {
             @Override
             public boolean matches(Channel channel) {
-                return channel != ctx.channel();
+                return channel != currentChannel;
             }
         });
         super.channelActive(ctx);
@@ -44,10 +45,11 @@ public class ChatMessageHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        final Channel currentChannel = ctx.channel();
         group.writeAndFlush("用户：[" + ctx.channel().remoteAddress() + "]下线\n", new ChannelMatcher() {
             @Override
             public boolean matches(Channel channel) {
-                return channel != ctx.channel();
+                return channel != currentChannel;
             }
         });
         super.channelInactive(ctx);

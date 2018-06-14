@@ -94,7 +94,7 @@ public class ChatClient {
             throw new IllegalStateException("注册失败");
         }
 
-        ChannelPromise promise = future.channel().newPromise();
+        final ChannelPromise promise = future.channel().newPromise();
         future = future.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture f) throws Exception {
